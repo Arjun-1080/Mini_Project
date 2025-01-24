@@ -3,10 +3,13 @@
 
 :root{
 
+  --primary : #FFA500;
+  --secondary: #AF90FF;
+  --ternary : #13141D;
+  --grey-border : #737373; 
 
+}
 
-
-
-
-
+html,body{
+  background-color: var(--ternary);
 }
