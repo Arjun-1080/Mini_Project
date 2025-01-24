@@ -48,7 +48,10 @@ def scrape_movie_reviews(url, num_pages):
                 if date_elem:
                     review_data['date'] = date_elem.get_text(strip=True)
                 
-                if review_data:  # Only append if we found some data
+                # Get source
+                review_data['source'] = 'LetterBoxd'
+
+                if review_data: 
                     all_reviews.append(review_data)
             
             print(f"Scraped page {page}, found {len(review_containers)} reviews")
@@ -100,6 +103,8 @@ def scrape_movie_reviews_rotten(url):
         
         if review_data:  # Only append if we found some data
             all_reviews.append(review_data)
+
+        review_data['source'] = 'Rotten Tomatoes'
     
     return all_reviews
 
