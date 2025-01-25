@@ -10,10 +10,10 @@
 
 }
 
-html,body{
+body{
   font-family: Urbanist;
   background-color: var(--ternary);
-  color: aliceblue;
+
 }
 
 h1,
