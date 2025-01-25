@@ -54,7 +54,7 @@ def scrape_movie_reviews(url, num_pages):
                 if review_data: 
                     all_reviews.append(review_data)
             
-            print(f"Scraped page {page}, found {len(review_containers)} reviews")
+            # print(f"Scraped page {page}, found {len(review_containers)} reviews")
             
         except requests.exceptions.RequestException as e:
             print(f"Error scraping page {page}: {e}")
@@ -116,8 +116,8 @@ def scrape_movie_details(url):
 
         prettified_html = soup.prettify().splitlines()
         
-        # Get the first 200 lines
-        first_200_lines = "\n".join(prettified_html[:2000])
+     
+        first_200_lines = "\n".join(prettified_html[:3000])
         
         print(first_200_lines)
         

@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { SearchIcon } from 'lucide-react';
 import axios from 'axios';
 import backendURL from '../lib/backendURL';
+import * as XLSX from 'xlsx'
+import SmallLoader from '../components/loader/Loader';
 
 function SearchPage() {
-
-  
-
 
   const [formData, setFormData] = useState('');  
   const [isSearched, setIsSearched] = useState(false);
@@ -35,6 +34,14 @@ function SearchPage() {
     }
   };
 
+  const toXLSX = () =>{
+    const worksheet = XLSX.utils.json_to_sheet(data?.reviews);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, `${data?.details?.title}.xlsx`);
+
+}
+
   
   const poster = data?.details?.poster || '';
   const title = data?.details?.title || '';
@@ -44,8 +51,8 @@ function SearchPage() {
   const popcorn = data?.details?.popcornmeter || 0;
   const tomato = data?.details?.tomatometer || 0;
 
-  const list = data?.reviews?.map((item : any) => (
-    <ReviewCard item={item}/>
+  const list = data?.reviews?.map((item : any,i : any) => (
+    <ReviewCard item={item} key={i}/>
   ))
   
   return (
@@ -79,7 +86,9 @@ function SearchPage() {
             className="h-[55px] w-[55px] bg-[var(--secondary)] rounded-full rounded-bl-none flex justify-center items-center cursor-pointer"
             onClick={handleSearch}
           >
-            <SearchIcon size={30} color="#000" />
+            {isLoading?<SmallLoader/>:<SearchIcon size={30} color="#000" />}
+  
+            
           </div>
         </div>
       </div>
@@ -102,7 +111,8 @@ function SearchPage() {
           <div className='w-full h-fit flex justify-center items-center flex-col gap-10' >
             <div className='w-[660px] h-10  flex items-center gap-8'> 
                 <p className='text-[35px]'> Reviews</p>
-                <button className='bg-[#00912D] p-2 w-[130px] text-center rounded-lg cursor-pointer'>Download xls</button>
+                <button className='bg-[#00912D] p-2 w-[130px] text-center rounded-lg cursor-pointer'
+                        onClick={toXLSX}>Download xls</button>
             </div>
             <div className='flex flex-col gap-10 pb-20'>
                 {list}
