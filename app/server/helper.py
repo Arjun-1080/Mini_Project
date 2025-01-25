@@ -14,7 +14,8 @@ def stars_to_float(star_rating):
     return star_map.get(star_rating, 0)
 
 def trim_and_replace_spaces(text, replace_with='-'):
-    text = text.strip()
+    text = text.strip().lower()
+    print(text)
     return text.replace(' ', replace_with)
 
 __all__ = ['stars_to_float', 'trim_and_replace_spaces']
