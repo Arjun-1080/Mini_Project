@@ -2,8 +2,21 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from scrapper import scrape_movie_reviews, scrape_movie_reviews_rotten, scrape_movie_details
 from helper import trim_and_replace_spaces
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class MovieRequest(BaseModel):
     name: str
@@ -45,7 +58,7 @@ async def get_movies(request: MovieRequest):
             raise HTTPException(status_code=404, detail="No details found.")
         details.append(movieDetails)
 
-        return { "details": details,"reviews": reviews}
+        return { "details": details[0],"reviews": reviews}
 
     except Exception as e:
         # Handle unexpected errors
