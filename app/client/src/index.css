@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-
 
 :root{
 
@@ -11,5 +11,18 @@
 }
 
 html,body{
+  font-family: Urbanist;
   background-color: var(--ternary);
+  color: aliceblue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-family: Inter;
+  font-weight: 500;
+
 }
